@@ -1,4 +1,8 @@
-void fatal(char* err_msg) {
-    printf("fatal error: %s", err_msg);
-    exit(-1);
-}
+#ifndef HACKING
+#define HACKING
+
+#define EOL "\r\n"
+void fatal(char* err_msg);
+
+int recv_line(int sockfd, char* dest_buffer);
+#endif

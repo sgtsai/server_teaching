@@ -11,7 +11,7 @@
 
 int main(void) {
     printf("process start\n");
-    printf("------------------------------------------");
+    printf("------------------------------------------\n");
     int sockfd, new_sockfd;
     struct sockaddr_in host_addr, client_addr;
     socklen_t sin_size;

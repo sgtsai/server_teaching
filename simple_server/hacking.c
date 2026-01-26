@@ -12,12 +12,26 @@ void fatal(char* err_msg) {
 }
 
 int recv_line(int sockfd, char* dest_buffer) {
+    printf("in recv_line\n");
     int eol_match = 0;
     char* ptr = dest_buffer;
+    //int loop_enter_count = 0;  for debug
     while(recv(sockfd, ptr, 1, 0) == 1) {
-        if(*ptr = EOL[eol_match]) {
+        /*loop_enter_count++;
+        printf("loop_enter_count: %d\n", loop_enter_count);
+        if(loop_enter_count > 10) {
+            printf("infinite loop!!!\n");
+            break;
+        }*/
+        printf("recv char: %c\n", *ptr);
+        if((*ptr) == EOL[eol_match]) {
             eol_match++;
-            if(eol_match == 4) return strlen(dest_buffer);
+            if(eol_match == 2) {
+                ptr--;
+                *ptr = '\0';
+                printf("dest_buffer in recv_line: %s\n", dest_buffer);
+                return strlen(dest_buffer);
+            }
         }
         ptr++;
     }

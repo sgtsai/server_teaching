@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 #include "hacking.h"
 #include "handle_connection.h"
 
@@ -39,5 +40,6 @@ int main(void) {
         if((new_sockfd = accept(sockfd, (struct sockaddr*)&client_addr, &sin_size)) == -1)
             fatal("in accept");
         handle_connection(new_sockfd, &client_addr);
+        close(new_sockfd);  // Close the connection after handling
     }
 }
